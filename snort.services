@@ -1,0 +1,15 @@
+vim /lib/systemd/system/snort.service
+----cmd---
+ExecStart=/usr/sbin/snort -m 027 -D -d -l /var/log/snort -u snort -g snort --pid-path /run/snort/ -c /etc/snort/snort.conf -S "\"HOME_NET=[173.212.233.86/32]\"" -i eth0
+--------
+
+[Unit]
+Description=Snort
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/snort -m 027 -D -d -l /var/log/snort -u snort -g snort --pid-path /run/snort/ -c /etc/snort/snort.conf  -i eth0
+
+[Install]
+WantedBy=multi-user.target
